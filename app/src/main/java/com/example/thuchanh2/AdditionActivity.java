@@ -34,7 +34,8 @@ public class AdditionActivity extends AppCompatActivity {
         setContentView(R.layout.addition_activty);
         initUI();
 
-        spCategory.setAdapter(new ArrayAdapter<String>(this,R.layout.item_spcategory, new ArrayList<String>(Arrays.asList("a","b"))));
+        spCategory.setAdapter(new ArrayAdapter <String>(this,R.layout.item_spcategory,getResources().getStringArray(R.array.category)));
+
         initEvents();
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

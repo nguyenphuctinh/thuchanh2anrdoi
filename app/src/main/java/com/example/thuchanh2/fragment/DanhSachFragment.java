@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thuchanh2.R;
+import com.example.thuchanh2.UpdateDeleteActivity;
 import com.example.thuchanh2.adapter.TaskAdapter;
 import com.example.thuchanh2.dal.SQLiteHelper;
 import com.example.thuchanh2.models.Item;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,11 +57,18 @@ public class DanhSachFragment extends Fragment  implements TaskAdapter.ItemListe
 
     @Override
     public void onItemClick(View view, int position) {
-//        Item item = adapter.getItem(position);
-//        Intent intent = new Intent(getActivity(), UpdateDeleteActivity.class);
-//        intent.putExtra("item", item);
-//        startActivity(intent);
+        Item item = adapter.getItem(position);
+        Intent intent = new Intent(getActivity(), UpdateDeleteActivity.class);
+        intent.putExtra("item",  item);
+        startActivity(intent);
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        SQLiteHelper db = new SQLiteHelper(getContext());
 
+        List<Item>  items = db.getAll();
+        adapter.setLstTask(items);
+    }
 
 }

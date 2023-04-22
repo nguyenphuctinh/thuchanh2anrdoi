@@ -39,8 +39,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position){
-            case 0: return "HOME NAY";
-            case 1: return  "LICH SU";
+            case 0: return "Danh sach";
+            case 1: return  "Thong tin";
             case 2: return  "TIM KIEM";
         }
         return super.getPageTitle(position);

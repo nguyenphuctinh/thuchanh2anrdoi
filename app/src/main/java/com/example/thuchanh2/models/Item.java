@@ -1,6 +1,26 @@
 package com.example.thuchanh2.models;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Item(int id, String name, String startDate, String endDate, boolean isCompleted) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.isCompleted = isCompleted;
+    }
+
     private String name;
     private String startDate, endDate;
     private boolean isCompleted;

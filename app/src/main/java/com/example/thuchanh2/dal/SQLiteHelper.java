@@ -52,7 +52,7 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
             String startDate = cursor.getString(2);
             String endDate = cursor.getString(3);
             int isCompleted = cursor.getInt(4);
-            items.add(new Item(name, startDate, endDate, isCompleted==1));
+            items.add(new Item(id,name, startDate, endDate, isCompleted==1));
         }
         return  items;
     }
@@ -66,5 +66,21 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
 
         SQLiteDatabase sql = getWritableDatabase();
         return sql.insert("items", null, values);
+    }
+
+    public  void updateItem(Item item){
+        ContentValues values = new ContentValues();
+        values.put("name", item.getName());
+        values.put("startDate", item.getStartDate());
+        values.put("endDate", item.getEndDate());
+        values.put("isCompleted", item.getIsCompleted());
+        SQLiteDatabase sql = getWritableDatabase();
+        String[] args = {item.getId()+""};
+        sql.update("items", values, "id=?", args);
+    }
+    public void remove(Item item){
+        SQLiteDatabase sql = getWritableDatabase();
+        String[] args = {item.getId()+""};
+        sql.delete("items","id=?",args);
     }
 }
