@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.thuchanh2.adapter.ViewPagerAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -17,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FloatingActionButton fabAdd;
+
+    private BottomNavigationView bottomNavi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
 //                    case 2: navigationView.getMenu().findItem(R.id.mSearch).setChecked(true);
 //                    break;
                 }
+                switch (position){
+                    case 0: bottomNavi.getMenu().findItem(R.id.mList).setChecked(true);
+                        break;
+                    case 1: bottomNavi.getMenu().findItem(R.id.mInfo).setChecked(true);
+                        break;
+                    case 2: bottomNavi.getMenu().findItem(R.id.mFind).setChecked(true);
+                        break;
+                }
             }
 
             @Override
@@ -62,6 +74,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        bottomNavi.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.mList: viewPager.setCurrentItem(0);
+                    break;
+                case R.id.mInfo: viewPager.setCurrentItem(1);
+                    break;
+                case R.id.mFind: viewPager.setCurrentItem(2);
+                    break;
+            }
+            return true;
+        });
+
     }
 
     private void initUI() {
@@ -69,5 +93,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.bottom_nav);
         tabLayout.setupWithViewPager(viewPager);
         fabAdd = findViewById(R.id.fabAdd);
+        bottomNavi = findViewById(R.id.bottomNavi);
     }
 }

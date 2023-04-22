@@ -13,23 +13,24 @@
         android:layout_above="@+id/bottom_nav"
         />
 
-    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:id="@+id/bottom_nav"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        app:menu="@menu/navigation"-->
-    <!--        app:itemTextColor="@color/navigation"-->
-    <!--        app:itemIconTint="@color/navigation"-->
-    <!--        />-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomNavi"
+
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_navigation_menu"/>
 
     <com.google.android.material.tabs.TabLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottom_nav"
         android:layout_alignParentBottom="true"
         app:itemTextColor="@color/teal_700"
         app:itemIconTint="@color/purple_500"
+
         />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
