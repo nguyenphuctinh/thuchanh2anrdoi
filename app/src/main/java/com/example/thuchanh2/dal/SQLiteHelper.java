@@ -83,4 +83,22 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
         String[] args = {item.getId()+""};
         sql.delete("items","id=?",args);
     }
+
+    public List<Item> findBy(String s){
+        List<Item> items = new ArrayList<>();
+        SQLiteDatabase st = getReadableDatabase();
+        String order = "";
+        String q = "name like ?";
+        String[] args = {"%"+s+"%"};
+        Cursor cursor = st.query("items",null, q, args,null,null,order);
+        while (cursor != null && cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String startDate = cursor.getString(2);
+            String endDate = cursor.getString(3);
+            int isCompleted = cursor.getInt(4);
+            items.add(new Item(id,name, startDate, endDate, isCompleted==1));
+        }
+        return  items;
+    }
 }
