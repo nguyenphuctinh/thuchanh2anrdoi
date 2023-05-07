@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thuchanh2.R;
 import com.example.thuchanh2.adapter.TaskAdapter;
-import com.example.thuchanh2.dal.SQLiteHelper;
+import com.example.thuchanh2.dal.BaseSQliteHelper;
 import com.example.thuchanh2.models.Item;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class FindAndThongKeFragment extends Fragment {
         edTo = view.findViewById(R.id.edTo);
         edFrom = view.findViewById(R.id.edFrom);
         recycleView = view.findViewById(R.id.recycleView);
-        SQLiteHelper db = new SQLiteHelper(getContext());
+        BaseSQliteHelper<Item> db = new BaseSQliteHelper<Item>(getContext(), Item.class);
         List<Item>  items = db.getAll();
         adapter = new TaskAdapter();
         adapter.setLstTask(items);

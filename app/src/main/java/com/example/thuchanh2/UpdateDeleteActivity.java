@@ -14,7 +14,6 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.thuchanh2.dal.SQLiteHelper;
 import com.example.thuchanh2.models.Item;
 
 import java.util.ArrayList;
@@ -58,15 +57,12 @@ public class UpdateDeleteActivity extends AppCompatActivity {
                 String endDate = eEndDate.getText().toString();
                 boolean isCompleted = ckbIsCompleted.isChecked();
                 item.setName(name);
-                item.setStartDate(startDate);
-                item.setEndDate(endDate);
-                item.setCompleted(isCompleted);
-                SQLiteHelper  db = new SQLiteHelper(UpdateDeleteActivity.this);
+//                SQLiteHelper  db = new SQLiteHelper(UpdateDeleteActivity.this);
 
 
 
 
-                    db.remove(item);
+//                    db.remove(item);
                     finish();
             }
         });
@@ -86,15 +82,12 @@ public class UpdateDeleteActivity extends AppCompatActivity {
                 String endDate = eEndDate.getText().toString();
                 boolean isCompleted = ckbIsCompleted.isChecked();
                 item.setName(name);
-                item.setStartDate(startDate);
-                item.setEndDate(endDate);
-                item.setCompleted(isCompleted);
-                SQLiteHelper  db = new SQLiteHelper(UpdateDeleteActivity.this);
+//                SQLiteHelper  db = new SQLiteHelper(UpdateDeleteActivity.this);
 
 
 
 
-                db.updateItem(item);
+//                db.updateItem(item);
                 finish();
             }
         });

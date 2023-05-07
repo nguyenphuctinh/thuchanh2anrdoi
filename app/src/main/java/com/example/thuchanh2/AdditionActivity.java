@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.thuchanh2.dal.SQLiteHelper;
+import com.example.thuchanh2.dal.BaseSQliteHelper;
 import com.example.thuchanh2.models.Item;
 
 import java.util.ArrayList;
@@ -34,9 +34,9 @@ public class AdditionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = eTaskName.getText().toString();
-                Item item = new Item(name, "startDate", "endDate", false);
-                SQLiteHelper sql = new SQLiteHelper(AdditionActivity.this);
-                sql.addItem(item);
+                Item item = new Item(name);
+                BaseSQliteHelper<Item> sql = new BaseSQliteHelper<>(AdditionActivity.this, Item.class);
+                sql.add(item);
                 finish();
             }
         });

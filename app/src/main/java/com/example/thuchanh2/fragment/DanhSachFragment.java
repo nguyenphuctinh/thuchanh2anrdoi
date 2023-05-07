@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.thuchanh2.R;
 import com.example.thuchanh2.UpdateDeleteActivity;
 import com.example.thuchanh2.adapter.TaskAdapter;
-import com.example.thuchanh2.dal.SQLiteHelper;
+import com.example.thuchanh2.dal.BaseSQliteHelper;
 import com.example.thuchanh2.models.Item;
 
 import java.io.Serializable;
@@ -45,7 +45,7 @@ public class DanhSachFragment extends Fragment  implements TaskAdapter.ItemListe
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recycleView);
         adapter =  new TaskAdapter();
-       SQLiteHelper db = new SQLiteHelper(getContext());
+       BaseSQliteHelper<Item> db = new BaseSQliteHelper<>(getContext(), Item.class);
         List<Item>  items = db.getAll();
         adapter.setLstTask(items);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
@@ -65,7 +65,7 @@ public class DanhSachFragment extends Fragment  implements TaskAdapter.ItemListe
     @Override
     public void onResume() {
         super.onResume();
-        SQLiteHelper db = new SQLiteHelper(getContext());
+        BaseSQliteHelper<Item> db = new BaseSQliteHelper<Item>(getContext(), Item.class);
 
         List<Item>  items = db.getAll();
         adapter.setLstTask(items);
