@@ -58,9 +58,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         Item task = lstTask.get(position);
         if (task != null) {
             holder.tvName.setText(task.getName());
-            holder.tvEndDate.setText(task.getEndDate());
-            holder.tvStartDate.setText(task.getStartDate());
-            holder.ckbIsCompleted.setChecked(task.getIsCompleted());
 //            holder.btnRemove.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
@@ -119,21 +116,15 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
 
     public class TaskViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
-        private TextView tvName, tvStartDate, tvEndDate;
-        CheckBox ckbIsCompleted;
+        private TextView tvName;
         private Button btnRemove;
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvTask);
-//            tvDescribe = itemView.findViewById(R.id.eTaskDesc);
-            tvStartDate = itemView.findViewById(R.id.tvStartDate);
-            tvEndDate = itemView.findViewById(R.id.tvEndDate);
             btnRemove = itemView.findViewById(R.id.btnRemove);
-            ckbIsCompleted = itemView.findViewById(R.id.ckbIsCompleted);
             itemView.setOnClickListener(this);
         }
-
 
         @Override
         public void onClick(View view) {
