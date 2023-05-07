@@ -18,6 +18,12 @@
             android:name=".UpdateDeleteActivity"
             android:exported="false" />
         <activity
+            android:name=".TopicActivity"
+            android:exported="false" />
+        <activity
+            android:name=".home.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
