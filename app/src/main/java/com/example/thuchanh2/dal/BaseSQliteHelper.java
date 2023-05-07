@@ -11,12 +11,13 @@ import androidx.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class BaseSQliteHelper<TEntity> extends SQLiteOpenHelper {
     private Class<TEntity> type;
-    private static final String DATABASE_NAME = "4.db";
-    private static int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "5.db";
+    private static int DATABASE_VERSION = 3;
 
     public BaseSQliteHelper(@Nullable Context context, Class<TEntity> type) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -27,7 +28,8 @@ public class BaseSQliteHelper<TEntity> extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createTblTopic = "CREATE TABLE item (\n" +
                 "  itemID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "  itemName TEXT NOT NULL\n" +
+                "  itemName TEXT NOT NULL,\n" +
+                "  username TEXT NOT NULL\n" +
                 ");\n";
         sqLiteDatabase.execSQL(createTblTopic);
 
@@ -90,12 +92,6 @@ public class BaseSQliteHelper<TEntity> extends SQLiteOpenHelper {
                     }
                     field.set(entity, fieldValue);
                 }
-
-//                int id = cursor.getInt(0);
-//                String name = cursor.getString(1);
-//                String startDate = cursor.getString(2);
-//                String endDate = cursor.getString(3);
-//                int isCompleted = cursor.getInt(4);
                 items.add(entity);
             }
             return items;
@@ -170,21 +166,59 @@ public class BaseSQliteHelper<TEntity> extends SQLiteOpenHelper {
                 }
             }
             SQLiteDatabase sql = getWritableDatabase();
-            sql.update(item.getClass().getSimpleName(), values, "id=?", args);
+            sql.update(item.getClass().getSimpleName(), values, item.getClass().getSimpleName().toLowerCase()+"ID=?", args);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void removeVocabulary(TEntity item) {
+    public void remove(TEntity item, int recordID) {
         SQLiteDatabase sql = getWritableDatabase();
-//        String[] args = {item.getId()+""};
-//        sql.delete("items","id=?",args);
+        String[] args = {recordID+""};
+        sql.delete(item.getClass().getSimpleName(),item.getClass().getSimpleName().toLowerCase()+"ID=?",args);
     }
 
-    public List<TEntity> findBy(String s) {
+    public List<TEntity> findBy(String where) {
         List<TEntity> items = new ArrayList<>();
-//        y
+        try {
+          SQLiteDatabase st = getReadableDatabase();
+          Class<?> clazz = getEntityClass();
+          String order = "";
+          String q = " 1=1 ";
+          List<String> a = new ArrayList<>();
+
+          Cursor cursor = st.query(clazz.getSimpleName(),null, where, null,null,null,order);
+          while (cursor != null && cursor.moveToNext()) {
+              List<Field> fields = Arrays.asList(clazz.getDeclaredFields());
+              TEntity entity = (TEntity) clazz.newInstance();
+
+              for (Field field : fields) {
+                  field.setAccessible(true);
+                  String fieldName = field.getName();
+                  Object fieldValue = null;
+                  int columnIndex = cursor.getColumnIndex(fieldName);
+                  switch (field.getType().getSimpleName()) {
+                      case "int":
+                          fieldValue = cursor.getInt(columnIndex);
+                          break;
+                      case "String":
+                          fieldValue = cursor.getString(columnIndex);
+                          break;
+                      case "double":
+                          fieldValue = cursor.getDouble(columnIndex);
+                          break;
+                      case "float":
+                          fieldValue = cursor.getFloat(columnIndex);
+                          break;
+                  }
+                  field.set(entity, fieldValue);
+              }
+              items.add(entity);
+          }
+
+      }catch (Exception e){
+          System.out.println(e);
+      }
         return items;
     }
 }

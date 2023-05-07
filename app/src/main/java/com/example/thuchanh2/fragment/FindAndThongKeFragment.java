@@ -1,5 +1,7 @@
 package com.example.thuchanh2.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.example.thuchanh2.adapter.TaskAdapter;
 import com.example.thuchanh2.dal.BaseSQliteHelper;
 import com.example.thuchanh2.models.Item;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class FindAndThongKeFragment extends Fragment {
@@ -40,7 +43,9 @@ public class FindAndThongKeFragment extends Fragment {
         edFrom = view.findViewById(R.id.edFrom);
         recycleView = view.findViewById(R.id.recycleView);
         BaseSQliteHelper<Item> db = new BaseSQliteHelper<Item>(getContext(), Item.class);
-        List<Item>  items = db.getAll();
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        List<Item>  items = db.findBy("username = '"+username+"' ");
         adapter = new TaskAdapter();
         adapter.setLstTask(items);
 
@@ -57,7 +62,7 @@ public class FindAndThongKeFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                List<Item> items =  db.findBy(s);
+                List<Item> items =  db.findBy("1=1");
                 adapter.setLstTask(items);
                 return false;
             }

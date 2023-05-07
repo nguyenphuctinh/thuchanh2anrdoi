@@ -14,6 +14,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.thuchanh2.dal.BaseSQliteHelper;
 import com.example.thuchanh2.models.Item;
 
 import java.util.ArrayList;
@@ -21,10 +22,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 public class UpdateDeleteActivity extends AppCompatActivity {
-    private EditText eStartDate, eEndDate;
     private EditText eTaskName;
-    private Spinner spCategory;
-    CheckBox ckbIsCompleted;
     Button btnUpdate,btnDelete;
     private Item item;
 
@@ -36,7 +34,6 @@ public class UpdateDeleteActivity extends AppCompatActivity {
         initUI();
         eTaskName.setText(item.getName());
         initEvents();
-        spCategory.setAdapter(new ArrayAdapter<String>(this,R.layout.item_spcategory, new ArrayList<String>(Arrays.asList("a","b"))));
 
     }
 
@@ -53,16 +50,9 @@ public class UpdateDeleteActivity extends AppCompatActivity {
 //            }
 //        }
                 String name = eTaskName.getText().toString();
-                String startDate =  eStartDate.getText().toString();
-                String endDate = eEndDate.getText().toString();
-                boolean isCompleted = ckbIsCompleted.isChecked();
                 item.setName(name);
-//                SQLiteHelper  db = new SQLiteHelper(UpdateDeleteActivity.this);
-
-
-
-
-//                    db.remove(item);
+                BaseSQliteHelper<Item> db = new BaseSQliteHelper<Item>(UpdateDeleteActivity.this, Item.class);
+                   db.remove(item, item.getId());
                     finish();
             }
         });
@@ -78,16 +68,9 @@ public class UpdateDeleteActivity extends AppCompatActivity {
 //            }
 //        }
                 String name = eTaskName.getText().toString();
-                String startDate =  eStartDate.getText().toString();
-                String endDate = eEndDate.getText().toString();
-                boolean isCompleted = ckbIsCompleted.isChecked();
                 item.setName(name);
-//                SQLiteHelper  db = new SQLiteHelper(UpdateDeleteActivity.this);
-
-
-
-
-//                db.updateItem(item);
+                BaseSQliteHelper<Item>  db = new BaseSQliteHelper<>(UpdateDeleteActivity.this, Item.class);
+               db.update(item);
                 finish();
             }
         });
@@ -102,49 +85,6 @@ public class UpdateDeleteActivity extends AppCompatActivity {
 
         btnDelete = findViewById(R.id.btnRemove);
         btnUpdate = findViewById(R.id.btnUpdate);
-        ckbIsCompleted = findViewById(R.id.ckbIsCompleted);
-        spCategory = findViewById(R.id.spCategory);
-        initDatePicker();
     }
-    private void initDatePicker() {
-        eStartDate = findViewById(R.id.eStartDate);
-        Calendar c = Calendar.getInstance();
-        int hh = c.get(Calendar.HOUR_OF_DAY);
-        int mm = c.get(Calendar.MINUTE);
-        int year = c.get(Calendar.YEAR);
-        int mounth = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-
-        Context me = this;
-        eStartDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(me, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-                        eStartDate.setText(y + "/" + m + "/" + d);
-                    }
-                }, year, mounth, day);
-                datePickerDialog.show();
-            }
-        });
-
-        eEndDate = findViewById(R.id.eEndDate);
-        eEndDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(me, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-                        eEndDate.setText(y + "/" + m + "/" + d);
-                    }
-                }, year, mounth, day);
-                datePickerDialog.show();
-            }
-        });
-
-    }
-    
-
 
 }

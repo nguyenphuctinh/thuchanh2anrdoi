@@ -1,6 +1,8 @@
 package com.example.thuchanh2.fragment;
 ;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,7 +48,9 @@ public class DanhSachFragment extends Fragment  implements TaskAdapter.ItemListe
         recyclerView = view.findViewById(R.id.recycleView);
         adapter =  new TaskAdapter();
        BaseSQliteHelper<Item> db = new BaseSQliteHelper<>(getContext(), Item.class);
-        List<Item>  items = db.getAll();
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        List<Item>  items = db.findBy("username = '"+username+"' ");
         adapter.setLstTask(items);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
@@ -66,8 +70,10 @@ public class DanhSachFragment extends Fragment  implements TaskAdapter.ItemListe
     public void onResume() {
         super.onResume();
         BaseSQliteHelper<Item> db = new BaseSQliteHelper<Item>(getContext(), Item.class);
-
-        List<Item>  items = db.getAll();
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        List<Item>  items = db.findBy("username = '"+username+"' ");
+//        List<Item>  items = db.findBy("1=1");
         adapter.setLstTask(items);
     }
 

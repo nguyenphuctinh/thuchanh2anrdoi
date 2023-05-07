@@ -1,7 +1,9 @@
 package com.example.thuchanh2.home;
 
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thuchanh2.R;
 import com.example.thuchanh2.TopicActivity;
+import com.example.thuchanh2.login.LoginActivity;
 
 
 public class HomeActivity  extends AppCompatActivity {
@@ -29,7 +32,7 @@ public class HomeActivity  extends AppCompatActivity {
     private void khoiTao() {
         String[] ten = {
                 "Chủ đề",
-                "Vocabulary",
+                "Đăng xuất",
                 "Listen",
                 "Listen - Response",
                 "Grammar",
@@ -52,12 +55,19 @@ public class HomeActivity  extends AppCompatActivity {
         gvTrangChu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent;
                 switch (position) {
                     case 0 :
-                        Intent intent = new Intent(getApplicationContext(), TopicActivity.class);
+                        intent = new Intent(getApplicationContext(), TopicActivity.class);
                         startActivity(intent);
                         break;
                     case 1:
+                        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", null);
+                        editor.apply();
+                        intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
 
                         break;
                     case 2:

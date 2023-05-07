@@ -2,6 +2,7 @@ package com.example.thuchanh2;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -34,7 +35,9 @@ public class AdditionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = eTaskName.getText().toString();
-                Item item = new Item(name);
+                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                String username = sharedPreferences.getString("username", "");
+                Item item = new Item(name, username);
                 BaseSQliteHelper<Item> sql = new BaseSQliteHelper<>(AdditionActivity.this, Item.class);
                 sql.add(item);
                 finish();

@@ -4,6 +4,26 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
     private int itemID;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Item(int itemID, String username, String itemName) {
+        this.itemID = itemID;
+        this.username = username;
+        this.itemName = itemName;
+    }
+
+    public Item(String itemName, String username) {
+        this.username = username;
+        this.itemName = itemName;
+    }
 
     public int getId() {
         return itemID;
@@ -15,14 +35,8 @@ public class Item implements Serializable {
 
     private String itemName;
 
-    public Item(int id, String name) {
-        this.itemID = id;
-        this.itemName = name;
-    }
 
-    public Item(String name) {
-        this.itemName = name;
-    }
+
 
     public Item() {
     }
