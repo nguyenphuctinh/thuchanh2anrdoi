@@ -27,9 +27,7 @@ import java.util.List;
 
 public class FindAndThongKeFragment extends Fragment {
     private SearchView searchView;
-    private Spinner spCategory;
     private Button btSearch;
-    private EditText edFrom, edTo;
     private RecyclerView recycleView;
     private TaskAdapter adapter;
     @Nullable
@@ -37,10 +35,7 @@ public class FindAndThongKeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_search, container, false);
         searchView = view.findViewById(R.id.search);
-        spCategory = view.findViewById(R.id.spCategory);
         btSearch = view.findViewById(R.id.btSearch);
-        edTo = view.findViewById(R.id.edTo);
-        edFrom = view.findViewById(R.id.edFrom);
         recycleView = view.findViewById(R.id.recycleView);
         BaseSQliteHelper<Item> db = new BaseSQliteHelper<Item>(getContext(), Item.class);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
@@ -62,7 +57,9 @@ public class FindAndThongKeFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                List<Item> items =  db.findBy("1=1");
+                SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                String username = sharedPreferences.getString("username", "");
+                List<Item>  items = db.findBy("username = '"+username+"' ");
                 adapter.setLstTask(items);
                 return false;
             }

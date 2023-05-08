@@ -62,10 +62,9 @@ public class TopicActivity  extends AppCompatActivity {
                 switch (position){
                     case 0: bottomNavi.getMenu().findItem(R.id.mList).setChecked(true);
                         break;
-                    case 1: bottomNavi.getMenu().findItem(R.id.mInfo).setChecked(true);
+                    case 1: bottomNavi.getMenu().findItem(R.id.mFind).setChecked(true);
                         break;
-                    case 2: bottomNavi.getMenu().findItem(R.id.mFind).setChecked(true);
-                        break;
+
                 }
             }
 
@@ -78,9 +77,7 @@ public class TopicActivity  extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.mList: viewPager.setCurrentItem(0);
                     break;
-                case R.id.mInfo: viewPager.setCurrentItem(1);
-                    break;
-                case R.id.mFind: viewPager.setCurrentItem(2);
+                case R.id.mFind: viewPager.setCurrentItem(1);
                     break;
             }
             return true;

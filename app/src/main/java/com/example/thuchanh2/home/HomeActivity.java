@@ -13,10 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thuchanh2.R;
 import com.example.thuchanh2.TopicActivity;
+import com.example.thuchanh2.VocabularyActivity;
 import com.example.thuchanh2.login.LoginActivity;
 
 
-public class HomeActivity  extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     private GridView gvTrangChu;
     private FragmentTransaction transaction;
 
@@ -29,14 +30,16 @@ public class HomeActivity  extends AppCompatActivity {
         addEvent();
         khoiTao();
     }
+
     private void khoiTao() {
         String[] ten = {
                 "Chủ đề",
-                "Đăng xuất",
+                "Từ vựng",
                 "Listen",
                 "Listen - Response",
                 "Grammar",
-                "Reading"
+                "Reading",
+                "Đăng xuất"
         };
 
         int[] hinh = {
@@ -45,30 +48,27 @@ public class HomeActivity  extends AppCompatActivity {
                 R.drawable.topic_img,
                 R.drawable.topic_img,
                 R.drawable.topic_img,
+                R.drawable.topic_img,
                 R.drawable.topic_img
         };
 
-       HomeAdapter mainAdapter = new HomeAdapter(this,ten,hinh);
+        HomeAdapter mainAdapter = new HomeAdapter(this, ten, hinh);
         gvTrangChu.setAdapter(mainAdapter);
     }
+
     private void addEvent() {
         gvTrangChu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent;
                 switch (position) {
-                    case 0 :
+                    case 0:
                         intent = new Intent(getApplicationContext(), TopicActivity.class);
                         startActivity(intent);
                         break;
                     case 1:
-                        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("username", null);
-                        editor.apply();
-                        intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        intent = new Intent(getApplicationContext(), VocabularyActivity.class);
                         startActivity(intent);
-
                         break;
                     case 2:
 
@@ -81,6 +81,14 @@ public class HomeActivity  extends AppCompatActivity {
                         break;
                     case 5:
 
+                        break;
+                    case 6:
+                        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", null);
+                        editor.apply();
+                        intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
                         break;
                 }
             }

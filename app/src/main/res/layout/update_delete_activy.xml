@@ -5,58 +5,53 @@
     tools:context=".UpdateDeleteActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvName"
+        android:text="Tên chủ đề:"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
     <EditText
         android:id="@+id/eTaskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Nhap ten dự án"
+        android:hint="Nhập tên chủ đề"
         android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-        android:id="@+id/ckbIsCompleted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Đã hoàn thành"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/eTaskName" />
-
-    <EditText
-        android:id="@+id/eStartDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Từ ngày"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ckbIsCompleted" />
-
-    <EditText
-        android:id="@+id/eEndDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Đến ngày"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/eStartDate" />
+        />
 
     <Button
         android:id="@+id/btnUpdate"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="UPDATE"
+        android:backgroundTint="#3F84E5"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/eEndDate" />
+        app:layout_constraintTop_toBottomOf="@id/eTaskName" />
     <Button
         android:id="@+id/btnRemove"
         android:layout_width="100dp"
         android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
         android:text="REMOVE"
+        android:backgroundTint="#B20D30"
         app:layout_constraintLeft_toRightOf="@id/btnUpdate"
-        app:layout_constraintTop_toBottomOf="@id/eEndDate" />
-    <Spinner
-        android:id="@+id/spCategory"
+        app:layout_constraintTop_toBottomOf="@id/eTaskName" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvVocab"
+        android:text="Danh sách các từ vựng:"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnRemove"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/tvVocab"
+        android:id="@+id/recycleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/btnUpdate" />
+        android:layout_marginTop="10dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

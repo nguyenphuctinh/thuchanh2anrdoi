@@ -5,11 +5,7 @@
         android:title="Danh sach"
 
         />
-    <item android:id="@+id/mInfo"
-        android:icon="@drawable/list"
-        android:title="Thong tin"
 
-        />
     <item android:id="@+id/mFind"
         android:icon="@drawable/search"
         android:title="Thong tin"

@@ -4,6 +4,8 @@ public class Vocabulary {
     private int vocabularyID;
     private String word, definition;
 
+    private String username;
+
     /**
      * 0: Danh từ
      * 1: Tính từ
@@ -17,10 +19,19 @@ public class Vocabulary {
     public Vocabulary() {
     }
 
-    public Vocabulary(int vocabularyID, String word, String definition, int wordType, int topicID) {
+    public Vocabulary(int vocabularyID, String word, String definition, String username, int wordType, int topicID) {
         this.vocabularyID = vocabularyID;
         this.word = word;
         this.definition = definition;
+        this.username = username;
+        this.wordType = wordType;
+        this.topicID = topicID;
+    }
+
+    public Vocabulary(String word, String definition, String username, int wordType, int topicID) {
+        this.word = word;
+        this.definition = definition;
+        this.username = username;
         this.wordType = wordType;
         this.topicID = topicID;
     }
