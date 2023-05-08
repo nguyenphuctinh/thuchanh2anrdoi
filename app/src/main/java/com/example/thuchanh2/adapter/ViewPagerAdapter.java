@@ -23,8 +23,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:return new DanhSachFragment();
-            case 1:return new InfoFragment();
-            case 2:return new FindAndThongKeFragment();
+            case 1:return new FindAndThongKeFragment();
         }
 
         return  null;
@@ -32,7 +31,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Nullable
@@ -40,7 +39,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position){
             case 0: return "Danh sach";
-            case 1: return  "Thong tin";
             case 2: return  "TIM KIEM";
         }
         return super.getPageTitle(position);

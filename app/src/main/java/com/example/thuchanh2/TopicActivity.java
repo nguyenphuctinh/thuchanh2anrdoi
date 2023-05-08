@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-public class TopicActivity  extends AppCompatActivity {
+public class TopicActivity extends AppCompatActivity {
     //    private BottomNavigationView navigationView;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -31,7 +31,7 @@ public class TopicActivity  extends AppCompatActivity {
     }
 
     private void initEvents() {
-        fabAdd.setOnClickListener(new View.OnClickListener(){
+        fabAdd.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -51,7 +51,7 @@ public class TopicActivity  extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                switch (position){
+                switch (position) {
 //                    case 0: navigationView.getMenu().findItem(R.id.mHome).setChecked(true);
 //                    break;
 //                    case 1: navigationView.getMenu().findItem(R.id.mHistory).setChecked(true);
@@ -59,10 +59,15 @@ public class TopicActivity  extends AppCompatActivity {
 //                    case 2: navigationView.getMenu().findItem(R.id.mSearch).setChecked(true);
 //                    break;
                 }
-                switch (position){
-                    case 0: bottomNavi.getMenu().findItem(R.id.mList).setChecked(true);
+                switch (position) {
+                    case 0:
+                        bottomNavi.getMenu().findItem(R.id.item_1).setChecked(true);
                         break;
-                    case 1: bottomNavi.getMenu().findItem(R.id.mFind).setChecked(true);
+                    case 1:
+                        bottomNavi.getMenu().findItem(R.id.item_2).setChecked(true);
+                        break;
+                    case 2:
+                        bottomNavi.getMenu().findItem(R.id.item_3).setChecked(true);
                         break;
 
                 }
@@ -74,10 +79,15 @@ public class TopicActivity  extends AppCompatActivity {
             }
         });
         bottomNavi.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()){
-                case R.id.mList: viewPager.setCurrentItem(0);
+            switch (item.getItemId()) {
+                case R.id.item_1:
+                    viewPager.setCurrentItem(0);
                     break;
-                case R.id.mFind: viewPager.setCurrentItem(1);
+                case R.id.item_2:
+                    viewPager.setCurrentItem(1);
+                    break;
+                case R.id.item_3:
+                    viewPager.setCurrentItem(3);
                     break;
             }
             return true;

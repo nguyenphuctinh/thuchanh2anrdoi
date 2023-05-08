@@ -1,14 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/mList"
-        android:icon="@drawable/list"
-        android:title="Danh sach"
-
-        />
-
-    <item android:id="@+id/mFind"
-        android:icon="@drawable/search"
-        android:title="Thong tin"
-
-        />
+    <item
+        android:id="@+id/item_1"
+        android:enabled="true"
+        android:icon="@drawable/home"
+        android:title="Home"/>
+    <item
+        android:id="@+id/item_2"
+        android:enabled="true"
+        android:icon="@drawable/bag"
+        android:title="Giỏ hàng"/>
+    <item
+        android:id="@+id/item_3"
+        android:enabled="true"
+        android:icon="@drawable/account"
+        android:title="Tài khoản"/>
 </menu>

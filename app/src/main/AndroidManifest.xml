@@ -15,16 +15,10 @@
             android:name=".login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".VocabularyDetailActivity"
-            android:exported="false" />
-        <activity
             android:name=".register.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".AdditionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".VocabularyActivity"
             android:exported="false" />
         <activity
             android:name=".UpdateDeleteActivity"
